@@ -1,0 +1,1 @@
+export type THydrogenMode = 'huge' | 'medium' | 'point';
