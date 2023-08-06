@@ -8,7 +8,7 @@ import { useIsMobile } from './hooks/use-is-mobile';
 const timeout = 3000;
 
 export default function App() {
-  const [mode, setMode] = useState<THydrogenProps['mode']>('huge');
+  const [mode, setMode] = useState<THydrogenProps['state']>('huge');
   const isMobile = useIsMobile();
   const contentStyle = useMemo(() => {
     if (isMobile) {
@@ -24,13 +24,25 @@ export default function App() {
     };
   }, [isMobile]);
 
+  useEffect(() => {
+    setTimeout(
+      () => setMode('medium'),
+      3000
+    );
+    setTimeout(
+      () => setMode('point'),
+      6000
+    );
+  }, []);
+
   return (
     <View style={styles.container}>
       <SpaceBackground />
       <View style={{ position: 'absolute', top: '27px', ...contentStyle, borderWidth: 1, borderColor: 'red', borderStyle: 'solid' }}>
         <Hydrogen
-          mode={mode}
-          style={styles.HPosition}
+          visible
+          state={mode}
+          {...styles.HPosition}
         />
         <TextBaloon />
       </View>
@@ -56,7 +68,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   HPosition: {
-    left: '40px',
+    left: 40,
     top: 150,
   }
 });
