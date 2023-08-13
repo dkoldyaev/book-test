@@ -37,15 +37,16 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <SpaceBackground />
-      <View style={{ position: 'absolute', top: '27px', ...contentStyle, borderWidth: 1, borderColor: 'red', borderStyle: 'solid' }}>
-        <Hydrogen
-          visible
-          state={mode}
-          {...styles.HPosition}
-        />
-        <TextBaloon />
-      </View>
+      <SpaceBackground>
+        <View style={{ position: 'absolute', top: '27px', ...contentStyle, borderWidth: 1, borderColor: 'red', borderStyle: 'solid' }}>
+          <Hydrogen
+            visible
+            state={mode}
+            {...styles.HPosition}
+          />
+          <TextBaloon />
+        </View>
+      </SpaceBackground>
     </View>
   );
 }
