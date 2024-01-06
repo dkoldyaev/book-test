@@ -2,35 +2,22 @@ import { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { SpaceBackground } from './components/space-background';
 import { Hydrogen, THydrogenProps } from './components/hydrogen/hydrogen';
+import { HydrogenCloud, THydrogenCloudStepEnum } from './components/hydrogen-cloud/hydrogen-cloud';
 import { TextBaloon } from './components/text-baloon/text-baloon';
 import { useIsMobile } from './hooks/use-is-mobile';
 
 const timeout = 3000;
 
 export default function App() {
-  const [mode, setMode] = useState<THydrogenProps['state']>('huge');
-  const isMobile = useIsMobile();
-  const contentStyle = useMemo(() => {
-    if (isMobile) {
-      return {
-        left: 0,
-        width: '100%'
-      }
-    }
-    return {
-      left: '50%',
-      marginLeft: -76,
-      right: 0,
-    };
-  }, [isMobile]);
+  const [mode, setMode] = useState<THydrogenCloudStepEnum>(THydrogenCloudStepEnum.stage1);
 
   useEffect(() => {
     setTimeout(
-      () => setMode('medium'),
+      () => setMode(THydrogenCloudStepEnum.stage2),
       3000
     );
     setTimeout(
-      () => setMode('point'),
+      () => setMode(THydrogenCloudStepEnum.stage3),
       6000
     );
   }, []);
@@ -38,14 +25,15 @@ export default function App() {
   return (
     <View style={styles.container}>
       <SpaceBackground>
-        <View style={{ position: 'absolute', top: '27px', ...contentStyle, borderWidth: 1, borderColor: 'red', borderStyle: 'solid' }}>
+        <HydrogenCloud mode={mode} />
+        {/* <View style={{ position: 'absolute', top: '27px', ...contentStyle, borderWidth: 1, borderColor: 'red', borderStyle: 'solid' }}>
           <Hydrogen
             visible
             state={mode}
             {...styles.HPosition}
           />
           <TextBaloon />
-        </View>
+        </View> */}
       </SpaceBackground>
     </View>
   );

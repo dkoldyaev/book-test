@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Image, ImageSourcePropType } from 'react-native';
 import Animated, { Easing, useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { TPositionProps } from '../../types/unit.types';
+import { THydrogenMode } from './types';
 
 const sizes = {
     huge: 255,
@@ -19,7 +20,7 @@ const animationConfig = { duration: 1000, easing: Easing.ease };
 
 export type THydrogenProps = {
     visible?: boolean;
-    state: 'huge' | 'medium' | 'point';
+    state: THydrogenMode;
     left: TPositionProps;
     top: TPositionProps;
     marginTop?: number;
